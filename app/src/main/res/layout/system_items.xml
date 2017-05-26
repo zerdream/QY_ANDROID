@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="45dp"
+        android:layout_height="45dp">
+
+        <com.benben.office.views.MyIconImageView
+            android:layout_gravity="center"
+            android:id="@+id/system_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/title"
+        android:textSize="15sp"
+        android:textColor="#777"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center_horizontal"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:id="@+id/des"
+        android:textSize="9sp"
+        android:textColor="#999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

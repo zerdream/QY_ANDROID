@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_head"/>
+
+    <RelativeLayout
+        android:background="@mipmap/me_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.benben.office.views.MyIconImageView
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="18dp"
+            android:id="@+id/user_pic"
+            android:layout_width="44dp"
+            android:layout_height="44dp" />
+
+        <RelativeLayout
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_toRightOf="@id/user_pic"
+            android:layout_marginTop="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/name"
+                android:textSize="15sp"
+                android:textColor="#777"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginRight="50dp"
+                android:id="@+id/nickName"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                android:textColor="#777"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_marginTop="4dp"
+                android:layout_below="@id/name"
+                android:textSize="13sp"
+                android:textColor="#777"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:background="@drawable/pic_code"
+            android:layout_marginRight="19dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/user_pic"
+            android:layout_width="92dp"
+            android:layout_height="92dp" />
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/pic_code"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="27dp"
+            android:layout_below="@id/user_pic"
+            android:layout_width="90dp"
+            android:layout_height="90dp" />
+
+        <RelativeLayout
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/pic_code"
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="18dp"
+            android:layout_below="@id/user_pic"
+            android:id="@+id/des_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="12dp"
+                android:id="@+id/address"
+                android:drawableLeft="@mipmap/address"
+                android:textSize="11sp"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="12dp"
+                android:id="@+id/email"
+                android:drawableLeft="@mipmap/email"
+                android:layout_below="@id/address"
+                android:layout_marginTop="7dp"
+                android:textSize="11sp"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="12dp"
+                android:id="@+id/phoneNumber"
+                android:drawableLeft="@mipmap/tel"
+                android:layout_below="@id/email"
+                android:layout_marginTop="7dp"
+                android:textSize="11sp"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="12dp"
+                android:layout_marginBottom="22dp"
+                android:id="@+id/department"
+                android:drawableLeft="@mipmap/partment"
+                android:layout_below="@id/phoneNumber"
+                android:layout_marginTop="7dp"
+                android:textSize="11sp"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <!--<android.support.v7.widget.CardView
+        app:cardElevation="4dp"
+        android:background="#fff"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </android.support.v7.widget.CardView>-->
+
+</LinearLayout>
