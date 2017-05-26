@@ -70,7 +70,6 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
                     case "200" :
                         JSONArray data = object.getJSONArray("data");
                         final List<SecondEntity> list = JSON.parseArray(data.toJSONString(), SecondEntity.class);
-                        //ToastUtils.shortToast(SecondActivity.this , list.get(0).getChild().get(0).getUrl());
                         text_one.setText(list.get(0).getSystemName());
                         text_two.setText(list.get(1).getSystemName());
                         text_three.setText(list.get(2).getSystemName());
@@ -114,8 +113,11 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
         final PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        SecondAdapter adapter = new SecondAdapter(SecondActivity.this , list , index ) ;
+        SecondAdapter adapter = new SecondAdapter(SecondActivity.this , list  , index ) ;
+
         listView.setAdapter(adapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -279,7 +281,6 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
             }
         });
     }
-
 
     private void popUpWindow(List<SystemEntity> list) {
 

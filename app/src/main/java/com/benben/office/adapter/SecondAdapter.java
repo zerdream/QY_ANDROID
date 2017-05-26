@@ -1,6 +1,7 @@
 package com.benben.office.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,13 @@ public class SecondAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return list.size();
+        //return list.size();
+        return list.get(index).getChild().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return list.get(index).getChild().get(position);
     }
 
     @Override
@@ -60,6 +62,7 @@ public class SecondAdapter extends BaseAdapter {
 
         }
         holder.text01.setText(list.get(index).getChild().get(position).getSystemName());
+        //Log.e("benbne" , list.get(index).getChild().get(position).getSystemName() ) ;
         return convertView;
     }
 
