@@ -120,7 +120,7 @@ public class MainActivity extends BenBenActivity {
         SetDefaultFragment();
     }
 
-    //region 设置默认为首页Fragment
+    //region SetDefaultFragment 设置默认为首页Fragment
     /*
      * 方法名：SetDefaultFragment()
      * 功能：  设置默认为首页Fragment
@@ -134,7 +134,7 @@ public class MainActivity extends BenBenActivity {
     }
     //endregion
 
-    //region 设置活动的Fragment
+    //region ActiveFragment 设置活动的Fragment
     /*
      * 方法名：ActiveFragment(List<Fragment> listFragment,
      *                          FragmentTransaction transaction,
