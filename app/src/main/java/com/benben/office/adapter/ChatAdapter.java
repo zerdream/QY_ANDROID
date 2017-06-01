@@ -21,14 +21,36 @@ public class ChatAdapter extends BaseAdapter {
 
     private Context context ;
     private List<ChatEntity> list ;
-
+    final int TYPE_01 = 1;
+    final int TYPE_02 = 2;
+    final int TYPE_03 = 3;
+    final int TYPE_COUNT = 20;
     public ChatAdapter(){}
+
 
     public ChatAdapter(Context context , List<ChatEntity> list ){
         super();
         this.context = context;
         this.list = list;
     }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        if ("0001".equals(list.get(position).getFunctionName())) {
+            return TYPE_01;// 消费类型
+        } else if ("0002".equals(list.get(position).getFunctionName())) {
+            return TYPE_02;// 充值类型
+        } else {
+            return TYPE_03;
+        }
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return TYPE_COUNT;
+    }
+
     @Override
     public int getCount() {
         return list.size();
@@ -47,33 +69,71 @@ public class ChatAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder ;
-        if(convertView == null ){
-            convertView = LayoutInflater.from(context).inflate(R.layout.chat_item, parent , false);
-            holder = new ViewHolder() ;
-            holder.title_text = (TextView) convertView.findViewById(R.id.chat_item);
+        int type = getItemViewType(position);
+        ViewHolder01 holder01=null ;
+        ViewHolder02 holder02=null ;
 
-            convertView.setTag(holder);
+        if(convertView == null ){
+            //region 按当前所需的样式，确定new的布局
+            switch(type){
+                case TYPE_01:
+                    convertView = LayoutInflater.from(context).inflate(R.layout.chat_item_word, parent , false);
+                    holder01 = new ViewHolder01() ;
+                    holder01.title_text = (TextView) convertView.findViewById(R.id.chat_item);
+                    convertView.setTag(holder01);
+                    break;
+                case TYPE_02:
+                    convertView = LayoutInflater.from(context).inflate(R.layout.chat_item_image, parent , false);
+                    holder02 = new ViewHolder02() ;
+                    holder02.title_text = (TextView) convertView.findViewById(R.id.chat_item);
+                    convertView.setTag(holder02);
+                    break;
+                case TYPE_03:
+                    break;
+            }
+            //endregion
         }else {
-            holder = (ViewHolder) convertView.getTag();
+            //region 有convertView，按样式，取得不用的布局
+            switch(type) {
+                case TYPE_01:
+                    holder01 = (ViewHolder01) convertView.getTag();
+                    break;
+                case TYPE_02:
+                    holder02 = (ViewHolder02) convertView.getTag();
+                    break;
+            }
+            //endregion
         }
-        holder.title_text.setText(list.get(position).getFunctionName());
+        //region 设置资源
+        switch(type) {
+            case TYPE_01:
+                holder01.title_text.setText(list.get(position).getFunctionName());
+                break;
+            case TYPE_02:
+                holder02.title_text.setText(list.get(position).getFunctionName());
+                break;
+        }
+        //endregion
 
         return convertView;
     }
 
-    static class  ViewHolder{
+    //region 各个布局的控件资源
+    static class  ViewHolder01{
         TextView title_text ;
     }
 
-    public void addAll(Collection<? extends ChatEntity> collection) {
+    //各个布局的控件资源
+    static class  ViewHolder02{
+        TextView title_text ;
+    }
+    //endregion
 
+    public void addAll(Collection<? extends ChatEntity> collection) {
         list.addAll(collection);
         notifyDataSetChanged();
-
     }
     public void clear(){
-
         list.clear();
         notifyDataSetChanged();
     }
