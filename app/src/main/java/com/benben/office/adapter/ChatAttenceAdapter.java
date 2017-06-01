@@ -17,7 +17,7 @@ import java.util.List;
  * Created by 牛海丰 on 2017/5/24.
  */
 
-public class ChatAdapter extends BaseAdapter {
+public class ChatAttenceAdapter extends BaseAdapter {
 
     private Context context ;
     private List<ChatEntity> list ;
@@ -25,10 +25,10 @@ public class ChatAdapter extends BaseAdapter {
     final int TYPE_02 = 2;
     final int TYPE_03 = 3;
     final int TYPE_COUNT = 20;
-    public ChatAdapter(){}
+    public ChatAttenceAdapter(){}
 
 
-    public ChatAdapter(Context context , List<ChatEntity> list ){
+    public ChatAttenceAdapter(Context context , List<ChatEntity> list ){
         super();
         this.context = context;
         this.list = list;

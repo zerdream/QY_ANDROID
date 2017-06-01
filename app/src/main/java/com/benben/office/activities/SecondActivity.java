@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.benben.office.R;
-import com.benben.office.adapter.ChatAdapter;
+import com.benben.office.adapter.ChatAttenceAdapter;
 import com.benben.office.adapter.SecondAdapter;
 import com.benben.office.entities.ChatEntity;
 import com.benben.office.entities.SecondEntity;
@@ -52,7 +52,7 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
     private RelativeLayout relative_one , relative_two , relative_three ;
     private TextView text_one , text_two , text_three ;
     private ListView chatList ;
-    private ChatAdapter chatAdapter ;
+    private ChatAttenceAdapter chatAdapter ;
     private TextView chatItem ;
 
     @Override
@@ -251,7 +251,7 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
                 listChat.add(ae);
                 listChat.add(ae);
                 listChat.add(ae);
-                chatAdapter = new ChatAdapter(SecondActivity.this , listChat ) ;
+                chatAdapter = new ChatAttenceAdapter(SecondActivity.this , listChat ) ;
                 chatList.setAdapter(chatAdapter);
                 chatAdapter.notifyDataSetInvalidated();
                 //测试结束
