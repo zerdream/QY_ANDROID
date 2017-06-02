@@ -6,21 +6,50 @@ package com.benben.office.entities;
 
 public class ChatEntity {
 
-    private String functionName ;
+    private String typeId ;
+    private String Title ;
+    private String message ;
+    private String updateTime ;
 
     public ChatEntity(){}
 
-    public ChatEntity(String functionName) {
+    public ChatEntity(String typeId, String title, String message, String updateTime) {
         super();
-        this.functionName = functionName;
+        this.typeId = typeId;
+        Title = title;
+        this.message = message;
+        this.updateTime = updateTime;
     }
 
-    public String getFunctionName() {
-        return functionName;
+    public String getTypeId() {
+        return typeId;
     }
 
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName;
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 }

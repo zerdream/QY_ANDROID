@@ -124,9 +124,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent = new Intent(getActivity() , SecondActivity.class ) ;
-                                intent.putExtra("systemId" , list.get(position-1).getSystemId() ) ;
-                                startActivity(intent);
+                                if (position!=0){
+                                    Intent intent = new Intent(getActivity() , SecondActivity.class ) ;
+                                    intent.putExtra("systemId" , list.get(position-1).getSystemId() ) ;
+                                    startActivity(intent);
+                                }
+
                             }
                         });
                         break;

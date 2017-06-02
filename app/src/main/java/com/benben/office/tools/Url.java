@@ -6,7 +6,7 @@ package com.benben.office.tools;
 
 public class Url {
 
-    private static final String IP = "http://office.zerdream.com/api/" ;
+    public static final String IP = "http://office.zerdream.com/api/" ;
     public static final String auth_me = IP + "auth_me" ;
     public static final String colleague = IP + "colleague" ;
     public static final String system = IP + "getSystem" ;

@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.benben.office.R;
-import com.benben.office.adapter.ChatAttenceAdapter;
+import com.benben.office.adapter.ChatAdapter;
 import com.benben.office.adapter.SecondAdapter;
 import com.benben.office.entities.ChatEntity;
 import com.benben.office.entities.SecondEntity;
@@ -40,25 +40,25 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 import java.util.List;
 
-public class SecondActivity extends BenBenActivity implements View.OnClickListener{
+public class SecondActivity extends BenBenActivity implements View.OnClickListener {
 
-    private RelativeLayout pre ;
-    private TextView title ;
-    private ImageView set ;
-    private LinearLayout foot ;
+    private RelativeLayout pre;
+    private TextView title;
+    private ImageView set;
+    private LinearLayout foot;
 
-    private RelativeLayout mid ;
+    private RelativeLayout mid;
 
-    private RelativeLayout relative_one , relative_two , relative_three ;
-    private TextView text_one , text_two , text_three ;
-    private ListView chatList ;
-    private ChatAttenceAdapter chatAdapter ;
-    private TextView chatItem ;
+    private RelativeLayout relative_one, relative_two, relative_three;
+    private TextView text_one, text_two, text_three;
+
+    private ChatAdapter chatAdapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData() ;
+        loadData();
     }
 
     @Override
@@ -68,20 +68,20 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
 
     @Override
     public void initViews() {
-        pre = (RelativeLayout)findViewById(R.id.pre ) ;
-        title = (TextView)findViewById(R.id.title ) ;
-        set = (ImageView)findViewById(R.id.set ) ;
+        pre = (RelativeLayout) findViewById(R.id.pre);
+        title = (TextView) findViewById(R.id.title);
+        set = (ImageView) findViewById(R.id.set);
 
-        relative_one = (RelativeLayout) findViewById(R.id.relative_one ) ;
-        relative_two = (RelativeLayout) findViewById(R.id.relative_two ) ;
-        relative_three = (RelativeLayout) findViewById(R.id.relative_three ) ;
-        mid = (RelativeLayout) findViewById(R.id.mid ) ;
+        relative_one = (RelativeLayout) findViewById(R.id.relative_one);
+        relative_two = (RelativeLayout) findViewById(R.id.relative_two);
+        relative_three = (RelativeLayout) findViewById(R.id.relative_three);
+        mid = (RelativeLayout) findViewById(R.id.mid);
 
-        text_one = (TextView) findViewById(R.id.text_one ) ;
-        text_two = (TextView) findViewById(R.id.text_two ) ;
-        text_three = (TextView) findViewById(R.id.text_three ) ;
-        foot = (LinearLayout) findViewById(R.id.foot ) ;
-        chatList=(ListView) findViewById(R.id.chat_list);
+        text_one = (TextView) findViewById(R.id.text_one);
+        text_two = (TextView) findViewById(R.id.text_two);
+        text_three = (TextView) findViewById(R.id.text_three);
+        foot = (LinearLayout) findViewById(R.id.foot);
+        listView = (ListView) findViewById(R.id.listView);
 
     }
 
@@ -95,46 +95,46 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
 
     @Override
     public void initData() {
-        Intent intent = getIntent() ;
+        Intent intent = getIntent();
         String systemId = intent.getStringExtra("systemId");
-        switch (systemId){
-            case "1" :
+        switch (systemId) {
+            case "1":
                 title.setText("考勤");
                 break;
-            case "2" :
+            case "2":
                 title.setText("人力");
                 break;
-            case "3" :
+            case "3":
                 title.setText("财务");
                 break;
-            case "4" :
+            case "4":
                 title.setText("邮件");
                 break;
-            case "5" :
+            case "5":
                 title.setText("会议");
                 break;
-            case "6" :
+            case "6":
                 title.setText("项目管理");
                 break;
-            case "7" :
+            case "7":
                 title.setText("客户关系");
                 break;
-            case "8" :
+            case "8":
                 title.setText("工作管理");
                 break;
-            case "9" :
+            case "9":
                 title.setText("知识系统");
                 break;
-            case "10" :
+            case "10":
                 title.setText("企业文化");
                 break;
-            case "11" :
+            case "11":
                 title.setText("进销存");
                 break;
-            case "12" :
+            case "12":
                 title.setText("企业驾驶舱");
                 break;
-            case "13" :
+            case "13":
                 title.setText("小助手");
                 break;
             default:
@@ -145,34 +145,34 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.pre :
+        switch (v.getId()) {
+            case R.id.pre:
                 finish();
                 break;
-            case R.id.title :
+            case R.id.title:
                 loadSystem();
                 break;
-            case R.id.set :
-                ToastUtils.shortToast(SecondActivity.this , "设置");
+            case R.id.set:
+                ToastUtils.shortToast(SecondActivity.this, "设置");
                 break;
             default:
                 break;
         }
     }
 
-    //region loadData
+    //页面加载数据
     private void loadData() {
-        String urls = Url.getOrder ;
-        HttpUtils httpUtils = new HttpUtils() ;
-        RequestParams params = new RequestParams() ;
+        String urls = Url.getOrder;
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
         httpUtils.send(HttpRequest.HttpMethod.POST, urls, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                Log.e("getOrder" , responseInfo.result ) ;
+                Log.e("getOrder", responseInfo.result);
                 JSONObject object = JSON.parseObject(responseInfo.result);
                 String status_code = object.getString("status_code");
-                switch (status_code){
-                    case "200" :
+                switch (status_code) {
+                    case "200":
                         JSONArray data = object.getJSONArray("data");
                         final List<SecondEntity> list = JSON.parseArray(data.toJSONString(), SecondEntity.class);
                         text_one.setText(list.get(0).getSystemName());
@@ -181,19 +181,19 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
                         relative_one.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                popListView(list , 0 ) ;
+                                popListView(list, 0 );
                             }
                         });
                         relative_two.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                popListView(list , 1 ) ;
+                                popListView(list, 1 );
                             }
                         });
                         relative_three.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                popListView(list , 2 ) ;
+                                popListView(list, 2 );
                             }
                         });
                         break;
@@ -206,13 +206,12 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
             @Override
             public void onFailure(HttpException error, String msg) {
                 error.printStackTrace();
-                ToastUtils.shortToast(SecondActivity.this , "网络连接异常");
+                ToastUtils.shortToast(SecondActivity.this, "网络连接异常");
             }
         });
     }
-    //endregion
 
-    //region popListView 弹出功能菜单
+    //popListView 弹出功能菜单
     /*
      * 方法名：popListView
      * 功能：  弹出功能菜单
@@ -220,43 +219,20 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
      *        int
      * 返回值：无
      */
-    private void popListView(final List<SecondEntity> list , final int index ) {
+    private void popListView(final List<SecondEntity> list, final int index  ) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.pop_listview, null);
         final PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        SecondAdapter adapter = new SecondAdapter(SecondActivity.this , list  , index ) ;
-
+        SecondAdapter adapter = new SecondAdapter(SecondActivity.this, list, index);
         listView.setAdapter(adapter);
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //测试开始
-                final List<ChatEntity> listChat = JSON.parseArray("[{\"functionName\": \"0001\"}]", ChatEntity.class);
-                ChatEntity ae=new ChatEntity();
-                ae.setFunctionName("0002");
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                listChat.add(ae);
-                chatAdapter = new ChatAttenceAdapter(SecondActivity.this , listChat ) ;
-                chatList.setAdapter(chatAdapter);
-                chatAdapter.notifyDataSetInvalidated();
-                //测试结束
-
-                ToastUtils.shortToast(SecondActivity.this , list.get(index).getChild().get(position).getUrl() );
+                //ToastUtils.shortToast(SecondActivity.this , list.get(index).getChild().get(position).getUrl() );
+                loadChatData(list, index, position );
                 window.dismiss();
 
             }
@@ -266,21 +242,19 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
         window.setBackgroundDrawable(new BitmapDrawable());
         // 设置popWindow的显示和消失动画
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        switch (index){
-            case 0 :
+        switch (index) {
+            case 0:
                 window.showAtLocation(mid, Gravity.BOTTOM | Gravity.LEFT, 0, (foot.getHeight() + benben.getNavigationBarSize(SecondActivity.this).y));
                 break;
-            case 1 :
+            case 1:
                 window.showAtLocation(mid, Gravity.BOTTOM | Gravity.CENTER, 0, (foot.getHeight() + benben.getNavigationBarSize(SecondActivity.this).y));
                 break;
-            case 2 :
+            case 2:
                 window.showAtLocation(mid, Gravity.BOTTOM | Gravity.RIGHT, 0, (foot.getHeight() + benben.getNavigationBarSize(SecondActivity.this).y));
                 break;
             default:
                 break;
         }
-
-        //window.showAsDropDown(set);
         backgroundAlpha(0.8f);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -289,30 +263,26 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
             }
         });
     }
-    //endregion
 
-    //region loadSystem 切换系统
-    /*
-     * 方法名：loadSystem
-     * 功能：  切换系统
-     * 参数：  无
-     * 返回值：无
-     */
-    private void loadSystem() {
-        String urls = Url.system ;
-        HttpUtils httpUtils = new HttpUtils() ;
-        RequestParams params = new RequestParams() ;
+    //加载操作指令数据
+    private void loadChatData(final List<SecondEntity> list, int index, int position  ) {
+        final String urls = Url.IP + list.get(index).getChild().get(position).getUrl();
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
         httpUtils.send(HttpRequest.HttpMethod.POST, urls, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                Log.e("system" , responseInfo.result ) ;
+                Log.e("chatData", responseInfo.result);
                 JSONObject object = JSON.parseObject(responseInfo.result);
                 String status_code = object.getString("status_code");
-                switch (status_code){
-                    case "200" :
+                String orderCount = object.getString("orderCount");
+                switch (status_code) {
+                    case "200":
                         JSONArray data = object.getJSONArray("data");
-                        final List<SystemEntity> list = JSON.parseArray(data.toJSONString(), SystemEntity.class);
-                        popUpWindow(list) ;
+                        final List<ChatEntity> list01 = JSON.parseArray(data.toJSONString(), ChatEntity.class);
+                        chatAdapter = new ChatAdapter(SecondActivity.this , list01 , orderCount , urls ) ;
+                        listView.setAdapter(chatAdapter ) ;
+                        chatAdapter.notifyDataSetChanged();
                         break;
                     default:
                         break;
@@ -323,15 +293,49 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
             @Override
             public void onFailure(HttpException error, String msg) {
                 error.printStackTrace();
-                ToastUtils.shortToast(SecondActivity.this , "网络连接异常");
+                ToastUtils.shortToast(SecondActivity.this, "网络连接异常");
             }
         });
     }
-    //endregion
 
-    //region popUpWindow 弹出系统选择组件
-    /*
-     * 方法名：popUpWindow(List<SystemEntity> list)
+    /**
+     * 方法名：loadSystem 切换系统
+     * 功能：  切换系统
+     * 参数：  无
+     * 返回值：无
+     */
+    private void loadSystem() {
+        String urls = Url.system;
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        httpUtils.send(HttpRequest.HttpMethod.POST, urls, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Log.e("system", responseInfo.result);
+                JSONObject object = JSON.parseObject(responseInfo.result);
+                String status_code = object.getString("status_code");
+                switch (status_code) {
+                    case "200":
+                        JSONArray data = object.getJSONArray("data");
+                        final List<SystemEntity> list = JSON.parseArray(data.toJSONString(), SystemEntity.class);
+                        popUpWindow(list);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                error.printStackTrace();
+                ToastUtils.shortToast(SecondActivity.this, "网络连接异常");
+            }
+        });
+    }
+
+    /**
+     * 方法名：popUpWindow(List<SystemEntity> list) 弹出系统选择组件
      * 功能：  弹出系统选择组件
      * 参数：  List<SystemEntity>
      * 返回值：无
@@ -342,7 +346,7 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.common_window_wheel, null);
         final PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        final WheelView picker= (WheelView) view.findViewById(R.id.wheel);
+        final WheelView picker = (WheelView) view.findViewById(R.id.wheel);
 
         for (int i = 0; i < list.size(); i++) {
             picker.addData(list.get(i).getSystemName());
@@ -369,8 +373,8 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
         //public void setTextColor(int textColor);            //设置文字的颜色
         //public void setTextSize(float textSize);            //设置文字大小
         picker.setCenterItem(0);
-        picker.setTextColor(Color.rgb(106,201,210));
-        picker.setLineColor(Color.rgb(106,201,210) ) ;
+        picker.setTextColor(Color.rgb(106, 201, 210));
+        picker.setLineColor(Color.rgb(106, 201, 210));
         window.setFocusable(true);
         //点击空白的地方关闭PopupWindow
         window.setBackgroundDrawable(new BitmapDrawable());
@@ -386,11 +390,9 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
             }
         });
     }
-    //endregion
 
-    //region backgroundAlpha 设置添加屏幕的背景透明度
-    /*
-     * 方法名：backgroundAlpha(float bgAlpha)
+    /**
+     * 方法名：backgroundAlpha(float bgAlpha) 设置添加屏幕的背景透明度
      * 功能：  设置添加屏幕的背景透明度
      * 参数：  float
      * 返回值：无
@@ -400,5 +402,4 @@ public class SecondActivity extends BenBenActivity implements View.OnClickListen
         lp.alpha = bgAlpha;
         getWindow().setAttributes(lp);
     }
-    //endregion
 }
